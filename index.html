@@ -71,11 +71,17 @@
 
     <main class="pt-24 pb-16">
         <!-- 歡迎區塊 -->
-        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
             <h2 class="text-4xl sm:text-5xl font-extrabold text-green-700 mb-4 tracking-tight">
                 您的個人化糖尿病照護指南
             </h2>
-            <p class="text-xl text-gray-500 mb-6">專為 45 歲以上糖友與家人設計</p>
+            <p class="text-xl text-gray-500 mb-8">專為 45 歲以上糖友與家人設計</p>
+            
+            <!-- 插入使用者提供的圖片 (已更新為 PNG 格式) -->
+            <div class="mb-10 overflow-hidden rounded-2xl shadow-2xl bg-white p-2">
+                <img src="image/Figure 1.png" alt="糖尿病衛教主圖" class="w-full h-auto rounded-xl object-cover" onerror="this.parentElement.innerHTML='<div class=\'py-20 bg-gray-100 text-gray-400\'>[糖尿病衛教主圖預留位置]</div>'">
+            </div>
+
             <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg text-left shadow-lg">
                 <h3 class="text-2xl font-semibold text-yellow-800 mb-3 flex items-center">
                     <i data-lucide="heart-handshake" class="w-6 h-6 mr-3 text-yellow-600"></i>
@@ -317,11 +323,14 @@
         // 載入 Lucide Icons
         lucide.createIcons();
 
-        // 導航列平滑滾動功能 (僅針對手機版導航選單的連結)
-        document.querySelectorAll('#mobile-menu a').forEach(anchor => {
+        // 導航列 平滑滾動與手機選單
+        document.querySelectorAll('nav a, #mobile-menu a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.getElementById('mobile-menu').classList.add('hidden'); // 點擊後隱藏選單
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
                 const targetId = this.getAttribute('href');
                 document.querySelector(targetId).scrollIntoView({
                     behavior: 'smooth'
@@ -333,17 +342,6 @@
         document.getElementById('menu-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
-        });
-
-         // 導航列平滑滾動功能 (針對桌面版導航列的連結)
-        document.querySelectorAll('header nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
         });
     </script>
 </body>
